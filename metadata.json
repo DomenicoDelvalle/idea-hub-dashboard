@@ -1,0 +1,5 @@
+{
+  "name": "Idea Hub Dashboard",
+  "description": "A dashboard to visualize and manage app development data from research to project management, organized by idea. This app uses mock data as a placeholder for a real Supabase backend.",
+  "requestFramePermissions": []
+}
