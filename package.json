@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://SEU_USUARIO_GITHUB.github.io/idea-hub-dashboard",
+  "homepage": "https://DomenicoDelvalle.github.io/idea-hub-dashboard",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
