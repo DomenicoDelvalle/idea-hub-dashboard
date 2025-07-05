@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Sidebar } from "./components/Sidebar";
-import { Dashboard } from "./components/Dashboard";
-import { getAppIdeas } from "./services/supabaseService";
-import type { AppIdea } from "./types";
-import { Logo } from "./components/Logo";
-import { MenuIcon, CloseIcon } from "./components/icons";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Sidebar } from './components/Sidebar';
+import { Dashboard } from './components/Dashboard';
+import { getAppIdeas } from './services/supabaseService';
+import type { AppIdea } from './types';
+import { Logo } from './components/Logo';
 
 const App: React.FC = () => {
   const [appIdeas, setAppIdeas] = useState<AppIdea[]>([]);
-  const [selectedAppIdeaId, setSelectedAppIdeaId] = useState<string | null>(
-    null
-  );
+  const [selectedAppIdeaId, setSelectedAppIdeaId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -24,7 +21,7 @@ const App: React.FC = () => {
         setSelectedAppIdeaId(ideas[0].id);
       }
     } catch (err) {
-      setError("Failed to fetch app ideas.");
+      setError('Failed to fetch app ideas.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -35,9 +32,42 @@ const App: React.FC = () => {
     fetchIdeas();
   }, [fetchIdeas]);
 
-  const selectedIdea = appIdeas.find(
-    (idea: AppIdea) => idea.id === selectedAppIdeaId
-  );
+import React, { useState, useEffect, useCallback } from 'react';
+import { Sidebar } from './components/Sidebar';
+import { Dashboard } from './components/Dashboard';
+import { getAppIdeas } from './services/supabaseService';
+import type { AppIdea } from './types';
+import { Logo } from './components/Logo';
+import { MenuIcon, CloseIcon } from './components/icons';
+
+const App: React.FC = () => {
+  const [appIdeas, setAppIdeas] = useState<AppIdea[]>([]);
+  const [selectedAppIdeaId, setSelectedAppIdeaId] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+  const fetchIdeas = useCallback(async () => {
+    try {
+      setLoading(true);
+      const ideas = await getAppIdeas();
+      setAppIdeas(ideas);
+      if (ideas.length > 0) {
+        setSelectedAppIdeaId(ideas[0].id);
+      }
+    } catch (err) {
+      setError('Failed to fetch app ideas.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchIdeas();
+  }, [fetchIdeas]);
+
+  const selectedIdea = appIdeas.find((idea: AppIdea) => idea.id === selectedAppIdeaId);
 
   const handleSelectIdea = (id: string) => {
     setSelectedAppIdeaId(id);
@@ -48,20 +78,18 @@ const App: React.FC = () => {
     <div className="flex h-screen font-sans bg-slate-900 text-slate-300">
       {/* Overlay para mobile */}
       {sidebarOpen && (
-        <div
+        <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div
-        className={`
+      <div className={`
         w-72 bg-slate-950 flex flex-col h-full border-r border-slate-800 z-50
         fixed lg:static lg:translate-x-0 transition-transform duration-300 ease-in-out
-        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-      `}
-      >
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
         <div className="p-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Logo />
@@ -99,11 +127,12 @@ const App: React.FC = () => {
             <h1 className="text-lg font-bold text-white">Idea Hub</h1>
           </div>
         </div>
-
+        
         <Dashboard key={selectedAppIdeaId} selectedAppIdea={selectedIdea} />
       </main>
     </div>
   );
+};
 };
 
 export default App;

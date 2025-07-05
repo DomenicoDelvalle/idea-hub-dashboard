@@ -1,0 +1,77 @@
+/* Scrollbar utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Ensure proper text wrapping for long words */
+.break-words {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Mobile-first responsive text sizing */
+.text-responsive-xs {
+  font-size: 0.75rem;
+}
+@media (min-width: 768px) {
+  .text-responsive-xs {
+    font-size: 0.875rem;
+  }
+}
+
+.text-responsive-sm {
+  font-size: 0.875rem;
+}
+@media (min-width: 768px) {
+  .text-responsive-sm {
+    font-size: 1rem;
+  }
+}
+
+.text-responsive-base {
+  font-size: 1rem;
+}
+@media (min-width: 768px) {
+  .text-responsive-base {
+    font-size: 1.125rem;
+  }
+}
+
+/* Mobile-friendly markdown content */
+.markdown-content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.markdown-content pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.markdown-content code {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.markdown-content table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+  .space-y-mobile > * + * {
+    margin-top: 1rem;
+  }
+
+  .space-x-mobile > * + * {
+    margin-left: 0.5rem;
+  }
+}
